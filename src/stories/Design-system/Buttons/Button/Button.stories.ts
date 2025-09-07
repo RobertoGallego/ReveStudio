@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
+import { Button } from "./Button"
+import { MdInsertLink } from "react-icons/md"
 
 import { fn } from "storybook/test"
-
-import { Button } from "./Button"
 
 const meta = {
   title: "Design-system/Buttons/Button",
@@ -11,9 +11,6 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  argTypes: {
-    backgroundColor: { control: "color" },
-  },
   args: { onClick: fn() },
 } satisfies Meta<typeof Button>
 
@@ -22,27 +19,67 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    primary: true,
+    intent: "primary",
     label: "Button",
+    iconName: MdInsertLink,
   },
 }
 
 export const Secondary: Story = {
   args: {
+    intent: "secondary",
     label: "Button",
+    shape: "right",
   },
 }
 
-export const Large: Story = {
+export const Success: Story = {
   args: {
-    size: "large",
+    intent: "success",
     label: "Button",
+    size: "lg",
+    shape: "left",
   },
 }
 
-export const Small: Story = {
+export const Warning: Story = {
   args: {
-    size: "small",
+    intent: "warning",
     label: "Button",
+    disabled: true,
+  },
+}
+
+export const Danger: Story = {
+  args: {
+    intent: "danger",
+    label: "Button",
+    iconName: MdInsertLink,
+    iconPosition: "right",
+  },
+}
+
+export const IconOnly: Story = {
+  args: {
+    intent: "primary",
+    iconName: MdInsertLink,
+    shape: "default",
+  },
+}
+
+export const Loading: Story = {
+  args: {
+    intent: "primary",
+    label: "Loading...",
+    disabled: true,
+  },
+}
+
+export const NoLabel: Story = {
+  args: {
+    intent: "primary",
+    iconName: MdInsertLink,
+    shape: "default",
+    size: "lg",
   },
 }
