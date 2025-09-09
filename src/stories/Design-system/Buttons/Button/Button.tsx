@@ -5,13 +5,12 @@ import type { IconType } from "react-icons"
 export type Variant = "solid" | "outline" | "ghost" | "link"
 export type Intent = "primary" | "secondary" | "success" | "warning" | "danger"
 export type Size = "sm" | "md" | "lg"
-export type Shape = "left" | "default" | "right"
-export type IconPosition = "left" | "right"
+export type Shape = "left" | "default" | "none" | "right"
 
 export interface ButtonProps {
   disabled?: boolean
   iconName?: IconType
-  iconPosition?: IconPosition
+  iconNameRight?: IconType
   intent?: Intent
   label?: string
   loading?: boolean
@@ -19,11 +18,12 @@ export interface ButtonProps {
   shape?: Shape
   size?: Size
   variant?: Variant
+  skeleton?: boolean
 }
 
 export const Button = ({
   iconName,
-  iconPosition = "left",
+  iconNameRight,
   intent = "primary",
   disabled = false,
   label,
@@ -35,6 +35,7 @@ export const Button = ({
     left: "12px 0 0 12px",
     default: "12px",
     right: "0 12px 12px 0",
+    none: "0px",
   }
 
   const sizeStyles: Record<Size, { fontSize: string; padding: string }> = {
@@ -48,7 +49,7 @@ export const Button = ({
     { backgroundColor: string; color: string }
   > = {
     primary: { backgroundColor: "#007bff", color: "#ffffff" },
-    secondary: { backgroundColor: "#6c757d", color: "#ffffff" },
+    secondary: { backgroundColor: "#ffffff", color: "#4a4a4a" },
     success: { backgroundColor: "#28a745", color: "#ffffff" },
     warning: { backgroundColor: "#ffc107", color: "#ffffff" },
     danger: { backgroundColor: "#dc3545", color: "#ffffff" },
@@ -71,14 +72,19 @@ export const Button = ({
         boxShadow: "0px 1px 1px #d1d1d1",
         fontSize: sizeStyles[size].fontSize,
         fontWeight: "600",
-        color: "#fff",
+        color: intentStyles[intent].color,
+        cursor: disabled ? "not-allowed" : "pointer",
       }}
     >
-      {iconName && iconPosition === "left" && <Icon IconName={iconName} />}
+      {iconName && (
+        <Icon IconName={iconName} color={intentStyles[intent].color} />
+      )}
 
       {label}
 
-      {iconName && iconPosition === "right" && <Icon IconName={iconName} />}
+      {iconNameRight && (
+        <Icon IconName={iconNameRight} color={intentStyles[intent].color} />
+      )}
     </button>
   )
 }
