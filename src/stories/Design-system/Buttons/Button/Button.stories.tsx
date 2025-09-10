@@ -29,7 +29,6 @@ export const Playground: Story = {
   render: () => (
     <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
       <Button label="Copy Link" intent="secondary" iconName={MdInsertLink} />
-
       <Button label="Login" intent="secondary" iconName={FiUser} />
 
       <Button label="Sign Up" intent="primary" iconName={FiUserPlus} />
