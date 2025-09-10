@@ -1,12 +1,13 @@
-import type { Intent } from "@/types"
+import type { Intent, Size } from "@/types"
 
 type maxNumberType = 1 | 2 | 3
 
 interface BadgeProps {
   badgeContent?: number
-  children: React.ReactNode
+  children?: React.ReactNode
   maxNumberLength?: maxNumberType
   color?: Intent
+  size?: "sm" | "md" | "lg"
 }
 
 export const Badge = ({
@@ -14,6 +15,7 @@ export const Badge = ({
   children,
   maxNumberLength,
   color = "success",
+  size = "md",
 }: BadgeProps) => {
   const maxNumber = { 1: 9, 2: 99, 3: 999 }
   const intentStyles: Record<
@@ -27,6 +29,12 @@ export const Badge = ({
     danger: { backgroundColor: "#dc3545", color: "#ffffff" },
   }
 
+  const sizeStyles: Record<Size, { fontSize: string; padding: string, minWidth: number }> = {
+    sm: { fontSize: "12px", padding: "6px 8px", minWidth: 16 },
+    md: { fontSize: "14px", padding: "8px 10px", minWidth: 18 },
+    lg: { fontSize: "16px", padding: "10px 12px", minWidth: 20 },
+  }
+
   return (
     <div style={{ position: "relative" }}>
       {children}
@@ -34,15 +42,15 @@ export const Badge = ({
       {!!badgeContent && (
         <div
           style={{
-            position: "absolute",
+            position: children ? "absolute" : "relative",
             top: 0,
             right: 0,
-            transform: "translate(50%, -30%)",
+            transform: children ? "translate(50%, -30%)" : "none",
             display: "flex",
             alignItems: "center",
             backgroundColor: intentStyles[color].backgroundColor,
-            minWidth: 16,
-            height: 16,
+            minWidth: sizeStyles[size].minWidth,
+            height: sizeStyles[size].minWidth,
             borderRadius: 10,
           }}
         >
@@ -52,7 +60,10 @@ export const Badge = ({
               fontSize: 10,
               fontWeight: 600,
               fontFamily: "Arial, sans-serif",
-              padding: "0 4.5px",
+              textAlign: "center",
+              alignSelf: "center",
+              display: "flex",
+              paddingInline: "6px",
             }}
           >
             {maxNumberLength && badgeContent > maxNumber[maxNumberLength]

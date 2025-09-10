@@ -17,7 +17,14 @@ type Story = StoryObj<typeof meta>
 
 export const Playground = {
   render: () => (
-    <div style={{ display: "flex", gap: "20px", alignItems: "center", flexWrap: "wrap" }}>
+    <div
+      style={{
+        display: "flex",
+        gap: "20px",
+        alignItems: "center",
+        flexWrap: "wrap",
+      }}
+    >
       <Badge badgeContent={10} maxNumberLength={1}>
         <Button label="Notification" intent="secondary" />
       </Badge>
@@ -38,9 +45,15 @@ export const Playground = {
         <Avatar label="PG" />
       </Badge>
 
-      <Badge badgeContent={2025}>
+      <Badge badgeContent={2025} size="lg">
         <Avatar label="GG" />
       </Badge>
+
+      <Badge badgeContent={2025} color="primary" size="sm" />
+
+      <Badge badgeContent={2025} color="warning" size="md" />
+
+      <Badge badgeContent={2025} color="danger" size="lg" />
     </div>
   ),
 }
