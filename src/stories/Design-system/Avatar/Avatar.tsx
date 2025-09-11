@@ -1,15 +1,18 @@
+import type { Size } from "@/types"
+
 interface AvatarProps {
   label: string
   src?: string
+  size?: Size
 }
 
-export const Avatar = ({ label, src }: AvatarProps) => {
+export const Avatar = ({ label, src, size = "sm" }: AvatarProps) => {
   return (
     <div
       aria-label={label ?? "Avatar"}
       style={{
-        width: 40,
-        height: 40,
+        width: size === "sm" ? 28 : size === "md" ? 48 : 56,
+        height: size === "sm" ? 28 : size === "md" ? 48 : 56,
         borderRadius: "50%",
         backgroundColor: "#36418c",
         color: "white",
